@@ -54,12 +54,10 @@ def work_in(dirname=None):
     When exited, returns to the working directory prior to entering.
     """
     curdir = os.getcwd()
-    try:
-        if dirname is not None:
-            os.chdir(dirname)
-        yield
-    finally:
-        os.chdir(curdir)
+    if dirname is not None:
+        os.chdir(dirname)
+    yield
+    os.chdir(curdir)
 
 
 def make_executable(script_path) -> None:
