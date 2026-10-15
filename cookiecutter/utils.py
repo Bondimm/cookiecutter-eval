@@ -86,7 +86,7 @@ def simple_filter(filter_function):
 def create_tmp_repo_dir(repo_dir: os.PathLike[str]) -> Path:
     """Create a temporary dir with a copy of the contents of repo_dir."""
     repo_dir = Path(repo_dir).resolve()
-    base_dir = tempfile.mkdtemp(prefix='cookiecutter')
+    base_dir = os.path.join(tempfile.gettempdir(), 'cookiecutter')
     new_dir = f"{base_dir}/{repo_dir.name}"
     logger.debug(f'Copying repo_dir from {repo_dir} to {new_dir}')
     shutil.copytree(repo_dir, new_dir)
